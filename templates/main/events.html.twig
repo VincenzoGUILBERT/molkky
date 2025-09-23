@@ -12,7 +12,7 @@
             <p>{{ event.description }}</p>
             <p>Date de l'évenement: {{ event.date|date("d/m/Y H:i") }}</p>
             <p>Nombre de places: {{ event.nbrOfPlaces }}</p>
-            <p >Créé le: {{ event.createdAt|date("d/m/Y H:i") }}</p>
+            <p >Le: {{ event.createdAt|date("d/m/Y H:i") }}</p>
         </article>
 	{% endfor %}
 
