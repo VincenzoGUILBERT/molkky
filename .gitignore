@@ -19,3 +19,9 @@
 npm-debug.log
 yarn-error.log
 ###< symfony/webpack-encore-bundle ###
+
+.idea/workspace.xml
+
+.idea/commandlinetools/schemas/frameworkDescriptionVersion1.1.4.xsd
+
+.idea/commandlinetools/Symfony_23_09_2025_14_03.xml
