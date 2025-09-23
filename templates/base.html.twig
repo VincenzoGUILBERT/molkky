@@ -15,6 +15,33 @@
         {% endblock %}
     </head>
     <body>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="{{ path('app_home') }}">
+                <img src="{{ asset('https://scontent.fcdg3-1.fna.fbcdn.net/v/t39.30808-6/300382680_442610341243607_1531996953730681374_n.jpg?_nc_cat=111&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=Ym88XjsDedUQ7kNvwGukWim&_nc_oc=Adlxs_WTrTAKUHHO5dZ7xnDRTOtKdXv4MSLIfV5xEHz7xAEuCaqV93mq6ZzTicQ3kA4&_nc_zt=23&_nc_ht=scontent.fcdg3-1.fna&_nc_gid=XA1lHZHw9lBobFnu_CQdeQ&oh=00_AfYd2A0M98ZFda435fLE7qsoLlBglnBERX4Ayl8m8MK3Aw&oe=68D834D4') }}" alt="Logo" width="40" height="40" class="d-inline-block align-text-top">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="{{ path('app_home') }}">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ path('app_about') }}">À propos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ path('app_contact') }}">Contact</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
         {% block body %}{% endblock %}
+
+    <div id="fb-root"></div>
+    <script async defer crossorigin="anonymous"
+            src="https://connect.facebook.net/fr_FR/sdk.js#xfbml=1&version=v20.0"></script>
     </body>
 </html>
