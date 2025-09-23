@@ -26,12 +26,4 @@ final class MainController extends AbstractController
     {
         return $this->render('main/about.html.twig');
     }
-
-    #[Route('/events', name: 'app_events')]
-    public function events(EventRepository $repo): Response
-    {
-        return $this->render('main/events.html.twig', [
-            'events' => $repo->findAll(),
-        ]);
-    }
 }
