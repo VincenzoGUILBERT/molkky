@@ -1,0 +1,118 @@
+:root {
+    --card-bg: #ffffff;
+    --muted: #6b7280;
+    --accent: #0ea5a4;
+    --shadow: 0 6px 18px rgba(15, 23, 42, 0.08);
+    --radius: 12px;
+}
+
+.event-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 24px;
+    padding: 2em 4em;
+}
+
+.event-card {
+    border: 1px solid var(--border);
+    width: 48%;
+    max-width: 720px;
+    background: var(--card-bg);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    overflow: hidden;
+    display: flex;
+    gap: 0;
+    align-items: stretch;
+}
+
+/* left side: date badge */
+.event-card__left {
+    background: linear-gradient(
+        180deg,
+        rgba(14, 165, 164, 0.08),
+        rgba(14, 165, 164, 0.03)
+    );
+    padding: 18px 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-width: 120px;
+}
+
+.event-card__month {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+}
+.event-card__day {
+    font-size: 36px;
+    font-weight: 700;
+    margin-top: 4px;
+}
+.event-card__time {
+    font-size: 12px;
+    color: var(--muted);
+    margin-top: 6px;
+}
+
+/* right side: content */
+.event-card__body {
+    padding: 16px 20px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.event-title {
+    font-size: 18px;
+    font-weight: 700;
+    margin: 0;
+}
+.event-meta {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+.meta-item {
+    font-size: 13px;
+    color: var(--muted);
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.event-desc {
+    color: #374151;
+    font-size: 14px;
+    line-height: 1.4;
+    margin: 0;
+}
+
+.event-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+}
+
+.places {
+    font-size: 13px;
+    color: var(--muted);
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.pill {
+    background: #eef2f2;
+    padding: 6px 8px;
+    border-radius: 999px;
+    font-size: 12px;
+    color: var(--muted);
+}

@@ -12,22 +12,23 @@
         <div class="text-left position-relative text-white">
             <h1 class="display-4 mb-4">À propos de nous</h1>
             <p class="lead mb-4">Découvrez notre histoire et nos valeurs</p>
-            <a class="btn btn-primary btn-lg" href="contact.html.twig">Contact</a>
+            <a class="btn btn-primary btn-lg" href="{{ path('app_home') }}">Contact</a>
         </div>
     </div>
 </div>
 
 <!-- Contenu principal -->
 <div class="container">
+
     <!-- Section Nos valeurs -->
     <section class="py-5">
         <h2 class="text-center mb-5">Nos valeurs</h2>
         <div class="row g-4">
             <div class="col-md-4">
                 <div class="card h-100 text-center">
-                    <img src="/img/img-1.webp" class="card-img-top" alt="Image Respect" style="height: 200px; object-fit: cover;">
+                    <img src="/img/img-4.webp" class="card-img-top" alt="Image Respect" style="height: 200px; object-fit: cover;">
                     <div class="card-body">
-                        <h3 class="card-title">Lisa</h3>
+                        <h3 class="card-title">Respect</h3>
                         <p class="card-text">Respect mutuel et esprit sportif dans chaque partie.</p>
                     </div>
                 </div>
@@ -63,6 +64,42 @@
             </div>
             <div class="col-md-6">
                 <img src="/img/img-4.webp" class="img-fluid rounded shadow" alt="Image Notre histoire">
+            </div>
+        </div>
+    </section>
+
+     <!-- Section Nous trouver -->
+    <section class="py-5">
+        <div class="container">
+            <div class="row align-items-center g-5">
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <h2 class="text-center mb-5">Nous trouver</h2>
+                            <h5 class="card-title">Adresse</h5>
+                            <p class="card-text">3 Rue Turbil 69003 Lyon</p>
+                            <h5 class="card-title mt-4">Accès</h5>
+                            <p class="card-text">
+                                <strong>Métro :</strong> Ligne A - Station Charpennes<br>
+                                <strong>Bus :</strong> Lignes C1, C2, C5<br>
+                                <strong>Parking :</strong> Gratuit sur place
+                                <h5 class="card-title mt-4">Horaires</h5>
+                                <p class="card-text">
+                                    <strong>Samedi :</strong> 14h - 18h<br>
+                                    <strong>Dimanche :</strong> 10h - 16h<br>
+                                    <em>Entraînements et matchs amicaux</em>
+                                </p>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                    <div class="col-md-6">
+                        <div class="ratio ratio-4x3">
+                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2783.6830157934187!2d4.866097575613671!3d45.75750041382227!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47f4ea792a762339%3A0xeabb00a6c9e71893!2s3%20Rue%20Turbil%2C%2069003%20Lyon!5e0!3m2!1sfr!2sfr!4v1758635912906!5m2!1sfr!2sfr" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
