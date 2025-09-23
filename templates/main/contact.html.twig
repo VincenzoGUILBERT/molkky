@@ -4,4 +4,83 @@
 
 {% block body %}
 
+<form method="POST" action="{{ path('app_contact') }}">
+    <div class="form-group mb-3">
+        <label for="nom">Nom <span style="color:red">*</span></label>
+        <input type="text" class="form-control" id="nom" name="nom" placeholder="Votre nom" required>
+    </div>
+
+    <div class="form-group mb-3">
+        <label for="prenom">Prénom</label>
+        <input type="text" class="form-control" id="prenom" name="prenom" placeholder="Votre prénom">
+    </div>
+
+    <div class="form-group mb-3">
+        <label for="email">Email <span style="color:red">*</span></label>
+        <input type="email" class="form-control" id="email" name="email" placeholder="Votre adresse email" required>
+    </div>
+
+    <div class="form-group mb-3">
+        <label for="message">Message <span style="color:red">*</span></label>
+        <textarea class="form-control" id="message" name="message" rows="4" placeholder="Votre message" required></textarea>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Envoyer la demande</button>
+</form>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f5f7fa;
+        color: #333;
+    }
+
+    form {
+        max-width: 600px;
+        margin: 50px auto;
+        padding: 25px;
+        background: #ffffff;
+        border-radius: 10px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    form label {
+        font-weight: bold;
+        display: block;
+        margin-bottom: 6px;
+        color: #444;
+    }
+
+    form input,
+    form textarea {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 6px;
+        margin-bottom: 20px;
+        font-size: 14px;
+    }
+
+    form input:focus,
+    form textarea:focus {
+        border-color: #b30000;
+        outline: none;
+        box-shadow: 0 0 4px rgba(179, 0, 0, 0.4);
+    }
+
+    form button {
+        background-color: #b30000;
+        color: white;
+        font-size: 16px;
+        font-weight: bold;
+        border: none;
+        padding: 12px 25px;
+        border-radius: 6px;
+        cursor: pointer;
+    }
+
+    form button:hover {
+        background-color: #800000;
+    }
+</style>
+
 {% endblock %}
