@@ -1,0 +1,19 @@
+{% extends "base.html.twig" %}
+
+{% block title %}
+	Evenements
+{% endblock %}
+
+{% block body %}
+
+	{% for event in events %}
+		<article>
+            <h2>{{ event.title }}</h2>
+            <p>{{ event.description }}</p>
+            <p>Date de l'évenement: {{ event.date|date("d/m/Y H:i") }}</p>
+            <p>Nombre de places: {{ event.nbrOfPlaces }}</p>
+            <p >Créé le: {{ event.createdAt|date("d/m/Y H:i") }}</p>
+        </article>
+	{% endfor %}
+
+{% endblock %}

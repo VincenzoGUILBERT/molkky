@@ -32,6 +32,10 @@ class Event
     #[ORM\Column]
     private ?int $nbrOfPlaces = null;
 
+    public function __construct() {
+        $this->createdAt = new \DateTimeImmutable();
+    }
+
     public function getId(): ?int
     {
         return $this->id;
