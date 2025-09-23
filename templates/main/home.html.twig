@@ -13,19 +13,60 @@
     </section>
 
     {# Bloc 2 : Press Mollie #}
-    <section id="press-mollie" class="py-5 text-center bg-light">
+    <section id="press-mollie" class="press-mollie-section text-white">
         <div class="container">
-            <h2 class="mb-4">Press Mollie</h2>
-            <p class="lead">Ici tu pourras mettre du texte, des images, etc.</p>
+            <div class="row align-items-center">
+
+                {# Colonne gauche : texte #}
+                <div class="col-md-6 mb-4 mb-md-0">
+                    <h2 class="mb-3">Qu-est-ce que le Möllky ?</h2>
+                    <p>
+                        Le Mölkky est un jeu d’adresse finlandais qui se joue en plein air.
+                        Le but est de faire tomber des quilles numérotées en lançant un bâton en bois.
+                        C’est un mélange de stratégie, d’adresse et de convivialité, idéal pour s’amuser entre amis ou en famille.
+                    </p>
+
+                    {# Bouton en savoir plus #}
+                    <a href="https://fr.wikipedia.org/wiki/M%C3%B6lkky" target="_blank" rel="noopener noreferrer"
+                       class="btn btn-light mt-3">
+                        En savoir plus
+                    </a>
+                </div>
+
+                {# Colonne droite : image #}
+                <div class="col-md-6 text-center">
+                    <img src="https://www.unmondedebois.fr/771/le-jeu-de-molkky-en-bois.jpg"
+                         alt="Jeu de Mölkky" class="press-mollie-img">
+                </div>
+
+            </div>
         </div>
     </section>
 
-    {# Bloc 3 : Press Club #}
-    <section id="press-club" class="py-5 text-center">
-        <div class="container">
-            <h2 class="mb-4">Press Club</h2>
-            <p class="lead">Encore un espace pour ajouter ton contenu.</p>
+
+
+
+    {# Bloc 3 : Press Club (Facebook) #}
+    <section id="press-club" class="press-club-section">
+        <div class="container py-5">
+            <h2 class="mb-4 text-center">Actualités du Club</h2>
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    {# Remplace l’URL par celle de TA page Facebook #}
+                    <div class="fb-page"
+                         data-href="https://www.facebook.com/CRHOM69/"
+                         data-tabs="timeline"
+                         data-width=""
+                         data-height="650"   {# ajuste 550–700 pour n’afficher que ~2–3 posts #}
+                         data-small-header="false"
+                         data-adapt-container-width="true"
+                         data-hide-cover="false"
+                         data-show-facepile="false">
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
+
 
 {% endblock %}
