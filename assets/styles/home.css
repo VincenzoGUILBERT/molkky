@@ -1,0 +1,43 @@
+.hero-section {
+    height: 100vh;
+    background: url('https://scontent.fcdg3-1.fna.fbcdn.net/v/t39.30808-6/476609805_1043560707815231_6152162874473857285_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=cc71e4&_nc_ohc=0vqGP894G54Q7kNvwGZotYm&_nc_oc=AdmfllggG4alisVeUrHFaMCaUKM_Q0CuEJ5DrkufrrvV1dOfGcBtZhDJHi6i6rLWN0A&_nc_zt=23&_nc_ht=scontent.fcdg3-1.fna&_nc_gid=YImDcxC9BXFg5f0Mfx6IcA&oh=00_AfZorkLvTzE75H99jfdLstJMlAFVo7BrdhdKT7-4s3DuPw&oe=68D838DD') no-repeat center center/cover;
+}
+
+.hero-section .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.4);
+}
+
+.hero-section .content {
+    position: relative;
+    z-index: 2;
+}
+
+/* Section Press Mollie */
+.press-mollie-section {
+    background-color: #3b82f6; /* bleu moderne */
+    padding: 4rem 0;
+}
+
+.press-mollie-section h2 {
+    font-size: 2.2rem;
+    font-weight: bold;
+}
+
+.press-mollie-section p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+}
+
+
+/* Image de la section */
+.press-mollie-img {
+    max-width: 70%;   /* réduit la taille de l’image */
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
