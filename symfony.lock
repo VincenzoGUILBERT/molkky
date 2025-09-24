@@ -47,6 +47,12 @@
             "migrations/.gitignore"
         ]
     },
+    "google/recaptcha": {
+        "version": "1.3",
+        "recipe": {
+            "version": "1.1"
+        }
+    },
     "phpunit/phpunit": {
         "version": "12.3",
         "recipe": {
@@ -142,6 +148,12 @@
         "files": [
             "config/packages/mailer.yaml"
         ]
+    },
+    "symfony/mailtrap-mailer": {
+        "version": "7.3",
+        "recipe": {
+            "version": "7.2"
+        }
     },
     "symfony/maker-bundle": {
         "version": "1.64",
