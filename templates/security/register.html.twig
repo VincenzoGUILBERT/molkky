@@ -1,0 +1,14 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+
+	<div class="form-signin">
+        <h1 class="h3 mb-3 font-weight-normal">Sign up</h1>
+        <hr>
+        {{ form_start(form) }}
+        {{ form_widget(form) }}
+        <button class="btn btn-primary">Register</button>
+        {{ form_end(form) }}
+    </div>
+
+{% endblock %}
