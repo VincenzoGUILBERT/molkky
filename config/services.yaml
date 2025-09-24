@@ -5,6 +5,9 @@
 # https://symfony.com/doc/current/best_practices.html#use-parameters-for-application-configuration
 parameters:
 
+    # config/services.yaml
+    gallery_dir: '%kernel.project_dir%/public/uploads/gallery'
+
 services:
     # default configuration for services in *this* file
     _defaults:
@@ -18,3 +21,5 @@ services:
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
+
+

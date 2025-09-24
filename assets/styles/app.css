@@ -7,3 +7,18 @@ body {
     padding: 15px;
     margin: auto;
 }
+
+
+/* Vignettes : restent carrées recadrées */
+.gallery-thumb {
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    border-radius: .5rem;
+}
+
+/* Image dans le modal : montre l'original sans rognage */
+.modal-img {
+    max-width: 100%;
+    max-height: 90vh;
+    object-fit: contain;
+}

@@ -1,0 +1,8 @@
+/* public/css/app.css */
+.gallery-thumb {
+    aspect-ratio: 1 / 1;   /* vignettes carrées, modernes */
+    object-fit: cover;
+    border-radius: .5rem;
+}
+
+

@@ -1,0 +1,112 @@
+{# templates/gallery/index.html.twig #}
+{% extends 'base.html.twig' %}
+{% block title %}Galerie{% endblock %}
+
+{% block body %}
+    <div class="container py-5">
+        <h1 class="mb-3">Galerie</h1>
+        <p class="text-muted mb-4">Les derniers moments de l’association en images.</p>
+
+        {# Flash messages #}
+        {% for label, messages in app.flashes %}
+            {% for m in messages %}
+                <div class="alert alert-{{ label }} alert-dismissible fade show" role="alert">
+                    {{ m }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            {% endfor %}
+        {% endfor %}
+
+        {# Grille #}
+        {% if photos is not empty %}
+            <div class="row g-3">
+                {% for p in photos %}
+                    <div class="col-6 col-md-4 col-lg-3">
+                        <div class="card shadow-sm h-100 position-relative">
+                            {# Bouton supprimer - visible seulement admin #}
+                            {% if is_granted('ROLE_ADMIN') %}
+                                <div class="position-absolute top-0 end-0 m-2">
+                                    <form method="post"
+                                          action="{{ path('app_gallery_delete', {id: p.id}) }}"
+                                          onsubmit="return confirm('Supprimer cette photo ? Cette action est irréversible.');">
+                                        <input type="hidden" name="_token" value="{{ csrf_token('delete_photo_' ~ p.id) }}">
+                                        <button class="btn btn-sm btn-danger" title="Supprimer">✕</button>
+                                    </form>
+                                </div>
+                            {% endif %}
+
+                            {# Vignette cliquable (modal) #}
+                            <a href="#" class="open-photo" data-src="{{ asset('uploads/gallery/' ~ p.filename) }}" title="Voir en grand">
+                                <img src="{{ asset('uploads/gallery/' ~ p.filename) }}"
+                                     alt="{{ p.originalName ?? 'Photo' }}"
+                                     class="card-img-top gallery-thumb"
+                                     loading="lazy">
+                            </a>
+
+                            <div class="card-body p-2">
+                                <small class="text-muted">Ajoutée le {{ p.createdAt|date('d/m/Y H:i') }}</small>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <div class="text-center text-muted py-5">
+                <p>Aucune photo pour le moment.</p>
+            </div>
+        {% endif %}
+
+        <hr class="my-5">
+
+        {# Formulaire d’upload - visible seulement admin #}
+        {% if is_granted('ROLE_ADMIN') %}
+            <h2 class="h4 mb-3">Ajouter des photos</h2>
+            <form method="post" enctype="multipart/form-data">
+                <div class="mb-3">
+                    <label for="photos" class="form-label">Sélectionner des images (JPG, PNG, WEBP, max 10MB)</label>
+                    <input type="file" id="photos" name="photos[]" class="form-control"
+                           accept=".jpg,.jpeg,.png,.webp" multiple required>
+                </div>
+                <button class="btn btn-primary">Uploader</button>
+            </form>
+        {% else %}
+            <p class="text-muted">Seuls les administrateurs peuvent ajouter ou supprimer des photos.</p>
+        {% endif %}
+    </div>
+
+    {# Modal image plein écran #}
+    <div class="modal fade" id="photoModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-xl">
+            <div class="modal-content bg-dark">
+                <div class="modal-body p-0 text-center">
+                    <img id="modalPhoto" src="" alt="Photo" class="modal-img">
+                </div>
+                <div class="modal-footer justify-content-between bg-dark border-0">
+                    <a id="downloadLink" href="#" download class="btn btn-outline-light">Télécharger</a>
+                    <button type="button" class="btn btn-light" data-bs-dismiss="modal">Fermer</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const modalEl = document.getElementById('photoModal');
+            const modalImg = document.getElementById('modalPhoto');
+            const downloadLink = document.getElementById('downloadLink');
+            const bsModal = new bootstrap.Modal(modalEl);
+
+            document.querySelectorAll('.open-photo').forEach(a => {
+                a.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const src = a.getAttribute('data-src');
+                    modalImg.src = src;
+                    downloadLink.href = src;
+                    bsModal.show();
+                });
+            });
+
+            modalEl.addEventListener('hidden.bs.modal', () => { modalImg.src = ''; });
+        });
+    </script>
+{% endblock %}
