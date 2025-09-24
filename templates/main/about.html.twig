@@ -1,120 +1,229 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}About
-{% endblock %}
+{% block title %}À propos{% endblock %}
 
 {% block body %}
-<!-- Header -->
+<!-- Hero Section -->
 <div class="hero-section vh-100 d-flex align-items-center position-relative" 
-     style="background-image: url('/img/img-1.webp'); background-size: cover; background-position: center; background-repeat: no-repeat;">
-    <div class="overlay"></div>
+     style="background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/img/img-1.webp'); background-size: cover; background-position: center; background-attachment: fixed;">
     <div class="container">
-        <div class="text-left position-relative text-white">
-            <h1 class="display-4 mb-4">À propos de nous</h1>
-            <p class="lead mb-4">Découvrez notre histoire et nos valeurs</p>
-            <a class="btn btn-primary btn-lg" href="{{ path('app_home') }}">Contact</a>
+        <div class="row">
+            <div class="col-lg-8 text-white">
+                <h1 class="display-3 fw-bold mb-4 animate-fade-in">À propos de nous</h1>
+                <p class="lead mb-4 fs-4">Découvrez notre histoire et nos valeurs</p>
+                <a class="btn btn-primary btn-lg px-5 py-3 shadow" href="{{ path('app_home') }}">
+                    <i class="fas fa-envelope me-2"></i>Nous contacter
+                </a>
+            </div>
         </div>
     </div>
 </div>
 
-<!-- Contenu principal -->
-<div class="container">
-
-    <!-- Section Nos valeurs -->
-    <section class="py-5">
-        <h2 class="text-center mb-5">Nos valeurs</h2>
+<!-- Section Nos valeurs -->
+<section class="py-5 bg-light">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2 class="display-5 fw-bold mb-3">Nos valeurs</h2>
+            <p class="text-muted">Les principes qui guident notre club au quotidien</p>
+        </div>
+        
         <div class="row g-4">
             <div class="col-md-4">
-                <div class="card h-100 text-center">
-                    <img src="/img/img-4.webp" class="card-img-top" alt="Image Respect" style="height: 200px; object-fit: cover;">
-                    <div class="card-body">
-                        <h3 class="card-title">Respect</h3>
-                        <p class="card-text">Respect mutuel et esprit sportif dans chaque partie.</p>
+                <div class="card h-100 border-0 shadow-sm hover-lift">
+                    <img src="/img/img-4.webp" class="card-img-top" alt="Respect" style="height: 250px; object-fit: cover;">
+                    <div class="card-body text-center p-4">
+                        <div class="icon-circle bg-primary bg-opacity-10 text-primary mb-3 mx-auto">
+                            <i class="fas fa-handshake fs-3"></i>
+                        </div>
+                        <h3 class="h4 mb-3">Respect</h3>
+                        <p class="text-muted">Respect mutuel et esprit sportif dans chaque partie.</p>
                     </div>
                 </div>
             </div>
+            
             <div class="col-md-4">
-                <div class="card h-100 text-center">
-                    <img src="/img/img-2.jpeg" class="card-img-top" alt="Image Convivialité" style="height: 200px; object-fit: cover;">
-                    <div class="card-body">
-                        <h3 class="card-title">Convivialité</h3>
-                        <p class="card-text">Partage et bonne humeur autour de notre passion commune.</p>
+                <div class="card h-100 border-0 shadow-sm hover-lift">
+                    <img src="/img/img-2.jpeg" class="card-img-top" alt="Convivialité" style="height: 250px; object-fit: cover;">
+                    <div class="card-body text-center p-4">
+                        <div class="icon-circle bg-success bg-opacity-10 text-success mb-3 mx-auto">
+                            <i class="fas fa-users fs-3"></i>
+                        </div>
+                        <h3 class="h4 mb-3">Convivialité</h3>
+                        <p class="text-muted">Partage et bonne humeur autour de notre passion commune.</p>
                     </div>
                 </div>
             </div>
+            
             <div class="col-md-4">
-                <div class="card h-100 text-center">
-                    <img src="/img/img-3.jpg" class="card-img-top" alt="Image progression" style="height: 200px; object-fit: cover;">
-                    <div class="card-body">
-                        <h3 class="card-title">Progression</h3>
-                        <p class="card-text">Accompagnement de chacun dans son amélioration.</p>
+                <div class="card h-100 border-0 shadow-sm hover-lift">
+                    <img src="/img/img-3.jpg" class="card-img-top" alt="Progression" style="height: 250px; object-fit: cover;">
+                    <div class="card-body text-center p-4">
+                        <div class="icon-circle bg-warning bg-opacity-10 text-warning mb-3 mx-auto">
+                            <i class="fas fa-chart-line fs-3"></i>
+                        </div>
+                        <h3 class="h4 mb-3">Progression</h3>
+                        <p class="text-muted">Accompagnement de chacun dans son amélioration.</p>
                     </div>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
-    <!-- Section Notre histoire -->
-    <section class="py-5">
+<!-- Section Notre histoire -->
+<section class="py-5">
+    <div class="container">
         <div class="row align-items-center g-5">
-            <div class="col-md-6">
-                <h2 class="mb-4">Notre histoire</h2>
-                <p class="lead">Fondé par quelques passionnés, notre club a vu le jour autour de l'envie de partager ce sport finlandais unique.</p>
-                <p>Depuis nos débuts, nous accueillons régulièrement de nouveaux membres et organisons des rencontres conviviales tout au long de l'année.</p>
-            </div>
-            <div class="col-md-6">
-                <img src="/img/img-4.webp" class="img-fluid rounded shadow" alt="Image Notre histoire">
-            </div>
-        </div>
-    </section>
-
-     <!-- Section Nous trouver -->
-    <section class="py-5">
-        <div class="container">
-            <div class="row align-items-center g-5">
-                <div class="col-md-6">
-                    <div class="card">
-                        <div class="card-body">
-                            <h2 class="text-center mb-5">Nous trouver</h2>
-                            <h5 class="card-title">Adresse</h5>
-                            <p class="card-text">3 Rue Turbil 69003 Lyon</p>
-                            <h5 class="card-title mt-4">Accès</h5>
-                            <p class="card-text">
-                                <strong>Métro :</strong> Ligne A - Station Charpennes<br>
-                                <strong>Bus :</strong> Lignes C1, C2, C5<br>
-                                <strong>Parking :</strong> Gratuit sur place
-                                <h5 class="card-title mt-4">Horaires</h5>
-                                <p class="card-text">
-                                    <strong>Samedi :</strong> 14h - 18h<br>
-                                    <strong>Dimanche :</strong> 10h - 16h<br>
-                                    <em>Entraînements et matchs amicaux</em>
-                                </p>
-                            </p>
+            <div class="col-lg-6">
+                <div class="pe-lg-5">
+                    <h2 class="display-5 fw-bold mb-4">Notre histoire</h2>
+                    <p class="lead text-primary mb-4">Fondé par quelques passionnés, notre club a vu le jour autour de l'envie de partager ce sport finlandais unique.</p>
+                    <p class="text-muted mb-4">Depuis nos débuts, nous accueillons régulièrement de nouveaux membres et organisons des rencontres conviviales tout au long de l'année.</p>
+                    <div class="d-flex gap-4 mt-4">
+                        <div class="text-center">
+                            <div class="display-6 fw-bold text-primary">10+</div>
+                            <p class="text-muted small mb-0">Années d'existence</p>
                         </div>
-                    </div>
-                </div>
-
-                    <div class="col-md-6">
-                        <div class="ratio ratio-4x3">
-                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2783.6830157934187!2d4.866097575613671!3d45.75750041382227!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47f4ea792a762339%3A0xeabb00a6c9e71893!2s3%20Rue%20Turbil%2C%2069003%20Lyon!5e0!3m2!1sfr!2sfr!4v1758635912906!5m2!1sfr!2sfr" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                        <div class="text-center">
+                            <div class="display-6 fw-bold text-primary">100+</div>
+                            <p class="text-muted small mb-0">Membres actifs</p>
+                        </div>
+                        <div class="text-center">
+                            <div class="display-6 fw-bold text-primary">50+</div>
+                            <p class="text-muted small mb-0">Événements/an</p>
                         </div>
                     </div>
                 </div>
             </div>
+            <div class="col-lg-6">
+                <img src="/img/img-4.webp" class="img-fluid rounded shadow-lg" alt="Notre histoire">
+            </div>
         </div>
-    </section>
-</div>
+    </div>
+</section>
+
+<!-- Section Nous trouver -->
+<section class="py-5 bg-light">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2 class="display-5 fw-bold mb-3">Nous trouver</h2>
+            <p class="text-muted">Venez nous rendre visite</p>
+        </div>
+        
+        <div class="row g-4">
+            <div class="col-lg-5">
+                <div class="card border-0 shadow-sm h-100">
+                    <div class="card-body p-4">
+                        <div class="mb-4">
+                            <div class="d-flex align-items-center mb-3">
+                                <div class="icon-box bg-primary text-white me-3">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                </div>
+                                <div>
+                                    <h5 class="mb-1">Adresse</h5>
+                                    <p class="mb-0 text-muted">3 Rue Turbil, 69003 Lyon</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-4">
+                            <div class="d-flex align-items-start mb-3">
+                                <div class="icon-box bg-success text-white me-3">
+                                    <i class="fas fa-bus"></i>
+                                </div>
+                                <div>
+                                    <h5 class="mb-2">Accès</h5>
+                                    <p class="mb-1"><strong>Métro :</strong> Ligne A - Station Charpennes</p>
+                                    <p class="mb-1"><strong>Bus :</strong> Lignes C1, C2, C5</p>
+                                    <p class="mb-0"><strong>Parking :</strong> Gratuit sur place</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <div class="d-flex align-items-start">
+                                <div class="icon-box bg-warning text-white me-3">
+                                    <i class="fas fa-clock"></i>
+                                </div>
+                                <div>
+                                    <h5 class="mb-2">Horaires</h5>
+                                    <p class="mb-1"><strong>Samedi :</strong> 14h - 18h</p>
+                                    <p class="mb-1"><strong>Dimanche :</strong> 10h - 16h</p>
+                                    <p class="mb-0"><em class="text-muted">Entraînements et matchs amicaux</em></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-lg-7">
+                <div class="card border-0 shadow-sm h-100">
+                    <div class="card-body p-0">
+                        <div class="ratio ratio-16x9">
+                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2783.6830157934187!2d4.866097575613671!3d45.75750041382227!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47f4ea792a762339%3A0xeabb00a6c9e71893!2s3%20Rue%20Turbil%2C%2069003%20Lyon!5e0!3m2!1sfr!2sfr!4v1758635912906!5m2!1sfr!2sfr" 
+                                    style="border:0; border-radius: 8px;" 
+                                    allowfullscreen="" 
+                                    loading="lazy" 
+                                    referrerpolicy="no-referrer-when-downgrade">
+                            </iframe>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 
 <style>
-.overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.4);
+/* Effet hover sur les cartes */
+.hover-lift {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
+.hover-lift:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 1rem 3rem rgba(0,0,0,.175) !important;
+}
+
+/* Cercles d'icônes */
+.icon-circle {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Boîtes d'icônes carrées */
+.icon-box {
+    width: 45px;
+    height: 45px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+/* Animation fade-in */
+.animate-fade-in {
+    animation: fadeIn 1s ease-in;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Parallax effect */
 .hero-section {
     position: relative;
 }

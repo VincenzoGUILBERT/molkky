@@ -17,57 +17,88 @@
         {% endblock %}
     </head>
     <body>
-    {% for label, messages in app.flashes %}
-    {% for message in messages %}
-        <div class="alert alert-{{ label }} mt-3 text-center">
-            {{ message }}
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
+    <div class="container">
+        {# Logo #}
+        <a class="navbar-brand d-flex align-items-center" href="{{ path('app_home') }}">
+            <img src="{{ asset('https://scontent.fcdg3-1.fna.fbcdn.net/v/t39.30808-6/300382680_442610341243607_1531996953730681374_n.jpg?_nc_cat=111&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=Ym88XjsDedUQ7kNvwGukWim&_nc_oc=Adlxs_WTrTAKUHHO5dZ7xnDRTOtKdXv4MSLIfV5xEHz7xAEuCaqV93mq6ZzTicQ3kA4&_nc_zt=23&_nc_ht=scontent.fcdg3-1.fna&_nc_gid=XA1lHZHw9lBobFnu_CQdeQ&oh=00_AfYd2A0M98ZFda435fLE7qsoLlBglnBERX4Ayl8m8MK3Aw&oe=68D834D4') }}" 
+                 alt="Logo" 
+                 width="50" 
+                 height="50" 
+                 class="rounded-circle me-2">
+            <span class="fw-bold text-primary d-none d-lg-inline">CRHOM</span>
+        </a>
+        
+        {# Bouton hamburger #}
+        <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        
+        {# Menu #}
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav mx-auto">
+                <li class="nav-item">
+                    <a class="nav-link px-3{% if app.current_route == 'app_home' %} active fw-bold{% endif %}" href="{{ path('app_home') }}">
+                        <i class="fas fa-home me-1"></i>Accueil
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link px-3{% if app.current_route == 'app_about' %} active fw-bold{% endif %}" href="{{ path('app_about') }}">
+                        <i class="fas fa-info-circle me-1"></i>À propos
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link px-3{% if app.current_route == 'app_event_index' %} active fw-bold{% endif %}" href="{{ path('app_event_index') }}">
+                        <i class="fas fa-calendar-alt me-1"></i>Événements
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link px-3{% if app.current_route == 'app_gallery' %} active fw-bold{% endif %}" href="{{ path('app_gallery') }}">
+                        <i class="fas fa-images me-1"></i>Galerie
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link px-3{% if app.current_route == 'app_contact' %} active fw-bold{% endif %}" href="{{ path('app_contact') }}">
+                        <i class="fas fa-envelope me-1"></i>Contact
+                    </a>
+                </li>
+            </ul>
+            
+            {# Boutons Login/Logout #}
+            <ul class="navbar-nav">
+                {% if app.user %}
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <div class="user-avatar bg-primary text-white rounded-circle d-flex align-items-center justify-content-center me-2">
+                                {{ app.user.email|first|upper }}
+                            </div>
+                            <span class="d-none d-lg-inline">{{ app.user.email|split('@')|first }}</span>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end shadow" aria-labelledby="userDropdown">
+                            <li>
+                                <a class="dropdown-item" href="#">
+                                    <i class="fas fa-user me-2"></i>Mon profil
+                                </a>
+                            </li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li>
+                                <a class="dropdown-item text-danger" href="{{ path('app_logout') }}">
+                                    <i class="fas fa-sign-out-alt me-2"></i>Déconnexion
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                {% else %}
+                    <li class="nav-item">
+                        <a class="btn btn-primary rounded-pill px-4" href="{{ path('app_login') }}">
+                            <i class="fas fa-sign-in-alt me-2"></i>Connexion
+                        </a>
+                    </li>
+                {% endif %}
+            </ul>
         </div>
-    {% endfor %}
-{% endfor %}
-    <nav class="navbar navbar-expand-lg bg-body-tertiary">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="{{ path('app_home') }}">
-                <img src="{{ asset('https://scontent.fcdg3-1.fna.fbcdn.net/v/t39.30808-6/300382680_442610341243607_1531996953730681374_n.jpg?_nc_cat=111&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=Ym88XjsDedUQ7kNvwGukWim&_nc_oc=Adlxs_WTrTAKUHHO5dZ7xnDRTOtKdXv4MSLIfV5xEHz7xAEuCaqV93mq6ZzTicQ3kA4&_nc_zt=23&_nc_ht=scontent.fcdg3-1.fna&_nc_gid=XA1lHZHw9lBobFnu_CQdeQ&oh=00_AfYd2A0M98ZFda435fLE7qsoLlBglnBERX4Ayl8m8MK3Aw&oe=68D834D4') }}" alt="Logo" width="40" height="40" class="d-inline-block align-text-top">
-            </a>
-
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav me-auto">
-                    <li class="nav-item">
-                        <a class="nav-link{% if app.current_route == 'app_home' %} active{% endif %}" href="{{ path('app_home') }}">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ path('app_about') }}">À propos</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ path('app_contact') }}">Contact</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ path('app_event_index') }}">Événements</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ path('app_gallery') }}">Galerie</a>
-                    </li>
-                </ul>
-
-                {# Partie droite : login/logout #}
-                <ul class="navbar-nav">
-                    {% if app.user %}
-                        <li class="nav-item">
-                            <a class="btn btn-outline-danger ms-2" href="{{ path('app_logout') }}">LogOut</a>
-                        </li>
-                    {% else %}
-                        <li class="nav-item">
-                            <a class="btn btn-outline-primary ms-2" href="{{ path('app_login') }}">LogIn</a>
-                        </li>
-                    {% endif %}
-                </ul>
-            </div>
-        </div>
-    </nav>
+    </div>
+</nav>
 
     {% for label, messages in app.flashes %}
         {% for message in messages %}
@@ -81,62 +112,259 @@
         {% block body %}{% endblock %}
 
     <div id="fb-root"></div>
-    <footer class="bg-dark text-white py-5">
-        <div class="container">
-            <div class="row">
-
-                <div class="col-md-4 mb-4">
-                    <h5 class="mb-3">Club de Mölkky Roannais</h5>
-                    <p class="text-light">Rejoignez notre communauté passionnée et découvrez ce sport finlandais unique dans une ambiance conviviale</p>
-                    <a href="https://www.facebook.com/CRHOM69/" class="text-white me-3"><i class="fab fa-facebook"></i></a>
+    <footer class="bg-dark text-white pt-5 pb-3">
+    <div class="container">
+        <div class="row g-4">
+            
+            {# Section À propos #}
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="footer-brand mb-3">
+                    <img src="{{ asset('https://scontent.fcdg3-1.fna.fbcdn.net/v/t39.30808-6/300382680_442610341243607_1531996953730681374_n.jpg?_nc_cat=111&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=Ym88XjsDedUQ7kNvwGukWim&_nc_oc=Adlxs_WTrTAKUHHO5dZ7xnDRTOtKdXv4MSLIfV5xEHz7xAEuCaqV93mq6ZzTicQ3kA4&_nc_zt=23&_nc_ht=scontent.fcdg3-1.fna&_nc_gid=XA1lHZHw9lBobFnu_CQdeQ&oh=00_AfYd2A0M98ZFda435fLE7qsoLlBglnBERX4Ayl8m8MK3Aw&oe=68D834D4') }}" 
+                         alt="Logo" 
+                         width="50" 
+                         height="50" 
+                         class="rounded-circle me-2">
+                    <h5 class="d-inline-block mb-0 align-middle">Club Rhodanien de Mölkky</h5>
                 </div>
-
-                <div class="col-md-2 mb-4">
-                    <h6 class="mb-3">Liens rapides</h6>
-                    <ul class="list-unstyled">
-                        <li class="mb-2"><a href="{{ path('app_home') }}" class="text-light text-decoration-none">Accueil</a></li>
-                        <li class="mb-2"><a href="{{ path('app_about') }}" class="text-light text-decoration-none">A propos</a></li>
-                        <li class="mb-2"><a href="{{ path('app_contact') }}" class="text-light text-decoration-none">Contact</a></li>
-                        <li class="mb-2"><a href="{{ path('app_event_index') }}" class="text-light text-decoration-none">Evénements</a></li>
-                    </ul>
+                <p class="text-light opacity-75 mb-3">
+                    Rejoignez notre communauté passionnée et découvrez ce sport finlandais unique dans une ambiance conviviale.
+                </p>
+                <div class="social-links">
+                    <a href="https://www.facebook.com/CRHOM69/" target="_blank" class="btn btn-outline-light btn-sm rounded-circle me-2" title="Facebook">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a href="#" class="btn btn-outline-light btn-sm rounded-circle me-2" title="Instagram">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="mailto:contact.crhom@gmail.com" class="btn btn-outline-light btn-sm rounded-circle" title="Email">
+                        <i class="fas fa-envelope"></i>
+                    </a>
                 </div>
-
-                <div class="col-md-3 mb-4">
-                    <h6 class="mb-3">Infos pratiques</h6>
-                    <ul class="list-untitled">
-                        <li class="mb-2">
-                            <i class="fas fa-envelope me-2"></i>
-                            <span class="text-light">contact.crhom@gmail.com</span>
-                        </li>
-                        <li class="mb-2">
-                            <i class="fas fa-clock me-2"></i>
-                            <span class="text-light">Sam 14h-18h, Dim 10h-16h</span>
-                        </li>
-                        <li class="mb-2">
-                            <i class="fas fa-map-marker-alt me-2"></i>
-                            <span class="text-light">3 rue Turbil 69003 Lyon</span>
-                        </li>
-                    </ul>
-                </div>
-
-                <hr class="my-4">
-
-                <div class="row align-items-center">
-                    <div class="col-md-6">
-                        <p class="text-light">Copyrights 2025 Club de Mölkky Rhodanien
+            </div>
+            
+            {# Section Liens rapides #}
+            <div class="col-lg-2 col-md-6 mb-4">
+                <h6 class="text-uppercase fw-bold mb-3">
+                    <i class="fas fa-link me-2 text-primary"></i>Liens rapides
+                </h6>
+                <ul class="list-unstyled footer-links">
+                    <li class="mb-2">
+                        <a href="{{ path('app_home') }}" class="text-light text-decoration-none">
+                            <i class="fas fa-chevron-right me-2 small"></i>Accueil
+                        </a>
+                    </li>
+                    <li class="mb-2">
+                        <a href="{{ path('app_about') }}" class="text-light text-decoration-none">
+                            <i class="fas fa-chevron-right me-2 small"></i>À propos
+                        </a>
+                    </li>
+                    <li class="mb-2">
+                        <a href="{{ path('app_event_index') }}" class="text-light text-decoration-none">
+                            <i class="fas fa-chevron-right me-2 small"></i>Événements
+                        </a>
+                    </li>
+                    <li class="mb-2">
+                        <a href="{{ path('app_gallery') }}" class="text-light text-decoration-none">
+                            <i class="fas fa-chevron-right me-2 small"></i>Galerie
+                        </a>
+                    </li>
+                    <li class="mb-2">
+                        <a href="{{ path('app_contact') }}" class="text-light text-decoration-none">
+                            <i class="fas fa-chevron-right me-2 small"></i>Contact
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            
+            {# Section Infos pratiques #}
+            <div class="col-lg-3 col-md-6 mb-4">
+                <h6 class="text-uppercase fw-bold mb-3">
+                    <i class="fas fa-info-circle me-2 text-primary"></i>Infos pratiques
+                </h6>
+                <ul class="list-unstyled footer-info">
+                    <li class="mb-3 d-flex">
+                        <i class="fas fa-map-marker-alt me-3 mt-1 text-primary"></i>
+                        <span class="text-light opacity-75">3 rue Turbil<br>69003 Lyon</span>
+                    </li>
+                    <li class="mb-3 d-flex">
+                        <i class="fas fa-envelope me-3 mt-1 text-primary"></i>
+                        <a href="mailto:contact.crhom@gmail.com" class="text-light opacity-75 text-decoration-none">
+                            contact.crhom@gmail.com
+                        </a>
+                    </li>
+                    <li class="mb-3 d-flex">
+                        <i class="fas fa-clock me-3 mt-1 text-primary"></i>
+                        <span class="text-light opacity-75">
+                            Sam 14h-18h<br>
+                            Dim 10h-16h
+                        </span>
+                    </li>
+                </ul>
+            </div>
+            
+            {# Section Newsletter #}
+            <div class="col-lg-3 col-md-6 mb-4">
+                <h6 class="text-uppercase fw-bold mb-3">
+                    <i class="fas fa-bell me-2 text-primary"></i>Newsletter
+                </h6>
+                <p class="text-light opacity-75 small mb-3">
+                    Restez informé de nos événements et actualités
+                </p>
+                <form class="newsletter-form">
+                    <div class="input-group mb-3">
+                        <input type="email" class="form-control" placeholder="Votre email" aria-label="Email">
+                        <button class="btn btn-primary" type="submit">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
                     </div>
-                    <div class="col md-6 text-md-end">
-                        <a href="" class="text-light text-decoration-none me-3">Mentions légales</a>
-                        <a href="" class="text-light text-decoration-none me-3">Politique de confidentialité</a>
-                        <a href="" class="text-light text-decoration-none me-3">CGU</a>
-                    </div>
-                </div>
-
-
+                </form>
+            </div>
+            
+        </div>
+        
+        {# Séparateur #}
+        <hr class="my-4 opacity-25">
+        
+        {# Bas du footer #}
+        <div class="row align-items-center">
+            <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+                <p class="mb-0 text-light opacity-75 small">
+                    <i class="far fa-copyright me-1"></i>
+                    2025 Club Rhodanien de Mölkky - Tous droits réservés
+                </p>
+            </div>
+            <div class="col-md-6 text-center text-md-end">
+                <a href="#" class="text-light text-decoration-none opacity-75 small me-3 footer-link">
+                    Mentions légales
+                </a>
+                <a href="#" class="text-light text-decoration-none opacity-75 small me-3 footer-link">
+                    Politique de confidentialité
+                </a>
+                <a href="#" class="text-light text-decoration-none opacity-75 small footer-link">
+                    CGU
+                </a>
             </div>
         </div>
+        
+        {# Bouton retour en haut #}
+        <div class="text-center mt-4">
+            <a href="#" class="btn btn-outline-light btn-sm rounded-circle back-to-top">
+                <i class="fas fa-arrow-up"></i>
+            </a>
+        </div>
+    </div>
+</footer>
 
-    </footer>
+<style>
+/* Footer général */
+footer {
+    background: linear-gradient(180deg, #1a1a1a 0%, #0d0d0d 100%);
+}
+
+/* Logo dans le footer */
+.footer-brand {
+    display: flex;
+    align-items: center;
+}
+
+.footer-brand img {
+    transition: transform 0.3s ease;
+}
+
+.footer-brand:hover img {
+    transform: rotate(360deg);
+}
+
+/* Liens footer avec animation */
+.footer-links a,
+.footer-info a {
+    transition: all 0.3s ease;
+    position: relative;
+    padding-left: 0;
+}
+
+.footer-links a:hover,
+.footer-info a:hover {
+    padding-left: 5px;
+    color: var(--bs-primary) !important;
+}
+
+/* Boutons sociaux */
+.social-links .btn {
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.social-links .btn:hover {
+    background-color: var(--bs-primary);
+    border-color: var(--bs-primary);
+    transform: translateY(-3px);
+}
+
+/* Newsletter */
+.newsletter-form .form-control {
+    background-color: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: white;
+}
+
+.newsletter-form .form-control:focus {
+    background-color: rgba(255, 255, 255, 0.15);
+    border-color: var(--bs-primary);
+    color: white;
+    box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+}
+
+.newsletter-form .form-control::placeholder {
+    color: rgba(255, 255, 255, 0.5);
+}
+
+/* Liens du bas */
+.footer-link {
+    transition: all 0.3s ease;
+}
+
+.footer-link:hover {
+    opacity: 1 !important;
+    color: var(--bs-primary) !important;
+}
+
+/* Bouton retour en haut */
+.back-to-top {
+    width: 45px;
+    height: 45px;
+    transition: all 0.3s ease;
+}
+
+.back-to-top:hover {
+    background-color: var(--bs-primary);
+    border-color: var(--bs-primary);
+    transform: translateY(-5px);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    footer h6 {
+        margin-top: 1rem;
+    }
+}
+</style>
+
+<script>
+// Smooth scroll pour le bouton "retour en haut"
+document.querySelector('.back-to-top')?.addEventListener('click', function(e) {
+    e.preventDefault();
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+    });
+});
+</script>
 
     <script async defer crossorigin="anonymous"
             src="https://connect.facebook.net/fr_FR/sdk.js#xfbml=1&version=v20.0"></script>
