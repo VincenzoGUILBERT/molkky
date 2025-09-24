@@ -10,3 +10,4 @@ import './styles/app.css';
 import './styles/about.css';
 import './styles/home.css';
 import './styles/events.css';
+import './styles/gallery.css';

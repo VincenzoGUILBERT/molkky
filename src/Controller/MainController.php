@@ -26,4 +26,10 @@ final class MainController extends AbstractController
     {
         return $this->render('main/about.html.twig');
     }
+
+    #[Route('/galerie', name: 'app_gallerie')]
+    public function galerie(): Response
+    {
+        return $this->render('gallery/index.html.twig');
+    }
 }
