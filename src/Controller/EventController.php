@@ -79,4 +79,33 @@ final class EventController extends AbstractController
 
         return $this->redirectToRoute('app_event_index', [], Response::HTTP_SEE_OTHER);
     }
+
+    #[Route('/event/{id}/join', name: 'app_event_join')]
+    public function join(Event $event, EntityManagerInterface $em): Response
+    {
+        $user = $this->getUser();
+
+        if (!$user) {
+            $this->addFlash('error', 'Vous devez être connecté pour vous inscrire.');
+            return $this->redirectToRoute('app_event_index');
+        }
+
+        if ($event->getParticipants()->contains($user)) {
+            // Désinscription
+            $event->removeParticipant($user);
+            $this->addFlash('info', 'Vous vous êtes désinscrit de l’événement.');
+        } else {
+            try {
+                $event->addParticipant($user);
+                $this->addFlash('success', 'Vous êtes inscrit à l’événement !');
+            } catch (\Exception $e) {
+                $this->addFlash('error', $e->getMessage());
+            }
+        }
+
+        $em->persist($event);
+        $em->flush();
+
+        return $this->redirectToRoute('app_event_index', ['id' => $event->getId()]);
+    }
 }

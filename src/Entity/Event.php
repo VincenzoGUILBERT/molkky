@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\EventRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -32,8 +34,16 @@ class Event
     #[ORM\Column]
     private ?int $nbrOfPlaces = null;
 
-    public function __construct() {
+    /**
+     * @var Collection<int, User>
+     */
+    #[ORM\ManyToMany(targetEntity: User::class, inversedBy: 'events')]
+    private Collection $participants;
+
+    public function __construct()
+    {
         $this->createdAt = new \DateTimeImmutable();
+        $this->participants = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -109,6 +119,40 @@ class Event
     public function setNbrOfPlaces(int $nbrOfPlaces): static
     {
         $this->nbrOfPlaces = $nbrOfPlaces;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, User>
+     */
+    public function getParticipants(): Collection
+    {
+        return $this->participants;
+    }
+
+    public function addParticipant(User $participant): static
+    {
+        // Vérifie que l’utilisateur n’est pas déjà inscrit
+        if (!$this->participants->contains($participant)) {
+            // Vérifie qu’il reste des places
+            if ($this->nbrOfPlaces > 0) {
+                $this->participants->add($participant);
+                $this->nbrOfPlaces--; // décrémente le nombre de places
+            } else {
+                throw new \Exception("Il n'y a plus de places disponibles pour cet événement.");
+            }
+        }
+
+        return $this;
+    }
+
+    public function removeParticipant(User $participant): static
+    {
+        if ($this->participants->removeElement($participant)) {
+            // Libère une place
+            $this->nbrOfPlaces++;
+        }
 
         return $this;
     }

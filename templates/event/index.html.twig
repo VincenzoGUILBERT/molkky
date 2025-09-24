@@ -36,9 +36,12 @@
 							<span aria-hidden="true">📍</span>
 							<span id="event-location-2">{{event.location}}</span>
 						</div>
-
 						<div style="display:flex; gap:8px; align-items:center;">
-							<button class="btn btn-sm btn-primary" type="button">S'inscrire</button>
+							{% if event.participants.contains(app.user) %}
+								<a class="btn btn-sm btn-secondary" href="{{ path('app_event_join', {'id': event.id}) }}">Se désinscrire</a>
+							{% else %}
+								<a class="btn btn-sm btn-primary" href="{{ path('app_event_join', {'id': event.id}) }}">S'inscrire</a>
+							{% endif %}
 							<a class="btn btn-sm btn-info" href="{{path('app_event_show', {id: event.id})}}">Détails</a>
 						</div>
 					</div>

@@ -15,14 +15,16 @@ class AppFixtures extends Fixture
     {
         $faker = \Faker\Factory::create('fr_FR');
 
-        $user = new \App\Entity\User();
-        $user->setEmail('admin@gmail.com')
-            ->setName('admin')
-            ->setSurname('admin')
-            ->setPassword($this->hasher->hashPassword($user, 'password'))
-        ;
-        
-        $manager->persist($user);
+        for ($i = 0; $i < 50; $i++) {
+            $user = new \App\Entity\User();
+            $user->setEmail($faker->email())
+                ->setName($faker->firstName())
+                ->setSurname($faker->lastName())
+                ->setPassword($this->hasher->hashPassword($user, 'password'))
+            ;
+
+            $manager->persist($user);
+        }
 
         for ($i = 1; $i <= 10; $i++) {
             $event = new \App\Entity\Event();
@@ -32,7 +34,7 @@ class AppFixtures extends Fixture
                 ->setLocation($faker->city())
                 ->setNbrOfPlaces(10 + $faker->numberBetween(0, 20))
             ;
-            
+
             $manager->persist($event);
         }
 
