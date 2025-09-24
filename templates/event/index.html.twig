@@ -28,6 +28,11 @@
                         <!-- Event content -->
                         <div class="col-9">
                             <div class="card-body d-flex flex-column h-100">
+                                <div class="d-flex gap-2">
+                                    <a href="{{ path('app_event_edit', {'id': event.id}) }}" title="Modifier" class="d-flex justify-content-end mb-2">
+                                        <i class="fas fa-edit"></i>
+                                    </a>
+                                </div>
                                 <h5 class="card-title">{{ event.title }}</h5>
                                 <div class="mb-2 d-flex justify-content-between flex-wrap small text-muted">
                                     <span>Le {{ event.date|date('d/m/Y') }}</span>
