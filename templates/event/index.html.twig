@@ -6,12 +6,20 @@
 
 {% block body %}
 
+    <section class="bg-primary text-white py-5">
+        <div class="container text-center">
+            <h1 class="display-4 fw-bold mb-3">Evenements</h1>
+            <p class="lead mb-0">Tenez-vous vous à la page des prochains évenements</p>
+        </div>
+    </section>
+
 <div class="container my-4">
 
-       <div class="d-flex justify-content-end mb-3">
+    {% if is_granted('ROLE_ADMIN') %}
+        <div class="d-flex justify-content-end mb-3">
             <a  class="btn btn-primary" href="{{ path('app_event_new') }}">Nouveau</a>
-        </div>
-
+        </div> 
+    {% endif %}
 
     <div class="row g-4">
         {% for event in events %}

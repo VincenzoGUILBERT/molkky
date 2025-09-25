@@ -3,19 +3,13 @@
 {% block title %}Galerie{% endblock %}
 
 {% block body %}
+    <section class="bg-primary text-white py-5">
+        <div class="container text-center">
+            <h1 class="display-4 fw-bold mb-3">Galerie</h1>
+            <p class="lead mb-0">Les derniers moments de l’association en images.</p>
+        </div>
+    </section>
     <div class="container py-5">
-        <h1 class="mb-3">Galerie</h1>
-        <p class="text-muted mb-4">Les derniers moments de l’association en images.</p>
-
-        {# Flash messages #}
-        {% for label, messages in app.flashes %}
-            {% for m in messages %}
-                <div class="alert alert-{{ label }} alert-dismissible fade show" role="alert">
-                    {{ m }}
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                </div>
-            {% endfor %}
-        {% endfor %}
 
         {# Grille #}
         {% if photos is not empty %}
