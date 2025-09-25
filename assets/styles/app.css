@@ -1,11 +1,16 @@
 body {
-    background-color: lightgray;
+    background-color: rgb(241, 241, 241);
 }
 
 .form-signin {
+    background-color: white;
     max-width: 600px;
-    padding: 15px;
-    margin: auto;
+    padding: 2em;
+    margin: 2em auto;
+    border-radius: 10px;
+}
+
+.form-signin h3 {
 }
 
 
