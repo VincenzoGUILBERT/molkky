@@ -62,6 +62,13 @@
                         <i class="fas fa-envelope me-1"></i>Contact
                     </a>
                 </li>
+                {% if is_granted('ROLE_ADMIN') %}
+                    <li class="nav-item">
+                        <a class="nav-link px-3{% if app.current_route == 'app_contact' %} active {% endif %}" href="{{ path('admin_user_index') }}">
+                            👑Admin
+                        </a>
+                    </li>
+                {% endif %}
             </ul>
             
             {# Boutons Login/Logout #}
@@ -107,7 +114,7 @@
 
     {% for label, messages in app.flashes %}
         {% for message in messages %}
-            <div class="alert alert-{{ label == 'error' ? 'danger' : label }} alert-dismissible fade show" role="alert">
+            <div class="flash alert alert-{{ label == 'error' ? 'danger' : label }} alert-dismissible fade show" role="alert">
                 {{ message }}
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Fermer"></button>
             </div>

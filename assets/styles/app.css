@@ -28,3 +28,12 @@ body {
     max-height: 90vh;
     object-fit: contain;
 }
+
+.flash {
+    position: fixed;
+    bottom: 1em;
+    right: 1em;
+    z-index: 1050; /* Au-dessus de la navbar */
+    min-width: 250px;
+    max-height: 400px;
+}
