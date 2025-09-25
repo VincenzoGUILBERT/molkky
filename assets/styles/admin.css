@@ -30,6 +30,8 @@
     background: white;
     border-radius: 15px;
     overflow: hidden;
+    width: 75%;
+    margin: 0 auto 2rem auto;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.07);
 }
 
@@ -79,8 +81,8 @@
 
 .btn-modern {
     border-radius: 8px;
-    padding: 0.5rem 1rem;
-    font-weight: 500;
+    padding: 0.2rem 0.5rem;
+    font-weight: 400;
     font-size: 0.875rem;
     transition: all 0.2s ease;
     border: none;
@@ -122,7 +124,7 @@
 }
 
 .role-badge {
-    padding: 0.25rem 0.75rem;
+    padding: 0.25rem 0.2rem;
     border-radius: 20px;
     font-size: 0.75rem;
     font-weight: 600;
