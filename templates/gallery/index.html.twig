@@ -1,106 +1,200 @@
-{# templates/gallery/index.html.twig #}
 {% extends 'base.html.twig' %}
+
 {% block title %}Galerie{% endblock %}
 
 {% block body %}
-    <section class="bg-primary text-white py-5">
-        <div class="container text-center">
-            <h1 class="display-4 fw-bold mb-3">Galerie</h1>
-            <p class="lead mb-0">Les derniers moments de l’association en images.</p>
-        </div>
-    </section>
-    <div class="container py-5">
 
-        {# Grille #}
-        {% if photos is not empty %}
-            <div class="row g-3">
-                {% for p in photos %}
-                    <div class="col-6 col-md-4 col-lg-3">
-                        <div class="card shadow-sm h-100 position-relative">
-                            {# Bouton supprimer - visible seulement admin #}
-                            {% if is_granted('ROLE_ADMIN') %}
-                                <div class="position-absolute top-0 end-0 m-2">
-                                    <form method="post"
-                                          action="{{ path('app_gallery_delete', {id: p.id}) }}"
-                                          onsubmit="return confirm('Supprimer cette photo ? Cette action est irréversible.');">
-                                        <input type="hidden" name="_token" value="{{ csrf_token('delete_photo_' ~ p.id) }}">
-                                        <button class="btn btn-sm btn-danger" title="Supprimer">✕</button>
-                                    </form>
-                                </div>
-                            {% endif %}
+{# Hero Section #}
+<section class="bg-light py-5">
+    <div class="container text-center">
+        <h1 class="display-5 fw-bold mb-3">Galerie Photos</h1>
+        <p class="lead text-muted mb-0">Les meilleurs moments de notre club en images</p>
+    </div>
+</section>
 
-                            {# Vignette cliquable (modal) #}
-                            <a href="#" class="open-photo" data-src="{{ asset('uploads/gallery/' ~ p.filename) }}" title="Voir en grand">
+{# Section principale #}
+<div class="container py-5">
+    
+    {# Flash messages #}
+    {% for label, messages in app.flashes %}
+        {% for m in messages %}
+            <div class="alert alert-{{ label }} alert-dismissible fade show shadow-sm border-0" role="alert">
+                <i class="fas fa-check-circle me-2"></i>{{ m }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        {% endfor %}
+    {% endfor %}
+
+    {# Grille photos #}
+    {% if photos is not empty %}
+        <div class="row g-4 mb-5">
+            {% for p in photos %}
+                <div class="col-6 col-md-4 col-lg-3">
+                    <div class="card border-0 shadow-sm h-100 position-relative overflow-hidden hover-lift">
+                        
+                        {# Bouton supprimer - visible seulement admin #}
+                        {% if is_granted('ROLE_ADMIN') %}
+                            <div class="position-absolute top-0 end-0 m-2" style="z-index: 10;">
+                                <form method="post"
+                                      action="{{ path('app_gallery_delete', {id: p.id}) }}"
+                                      onsubmit="return confirm('Supprimer cette photo ? Cette action est irréversible.');"
+                                      class="d-inline">
+                                    <input type="hidden" name="_token" value="{{ csrf_token('delete_photo_' ~ p.id) }}">
+                                    <button class="btn btn-sm btn-danger rounded-circle" title="Supprimer">
+                                        <i class="fas fa-times"></i>
+                                    </button>
+                                </form>
+                            </div>
+                        {% endif %}
+
+                        {# Vignette cliquable (modal) #}
+                        <a href="#" class="open-photo text-decoration-none" data-src="{{ asset('uploads/gallery/' ~ p.filename) }}" title="Voir en grand">
+                            <div class="position-relative">
                                 <img src="{{ asset('uploads/gallery/' ~ p.filename) }}"
                                      alt="{{ p.originalName ?? 'Photo' }}"
-                                     class="card-img-top gallery-thumb"
+                                     class="card-img-top"
+                                     style="height: 200px; object-fit: cover;"
                                      loading="lazy">
-                            </a>
-
-                            <div class="card-body p-2">
-                                <small class="text-muted">Ajoutée le {{ p.createdAt|date('d/m/Y H:i') }}</small>
+                                <div class="position-absolute top-50 start-50 translate-middle opacity-0 hover-show">
+                                    <i class="fas fa-expand text-white fs-2"></i>
+                                </div>
                             </div>
+                        </a>
+
+                        <div class="card-body p-3">
+                            <small class="text-muted">
+                                <i class="fas fa-calendar-alt me-1"></i>
+                                {{ p.createdAt|date('d/m/Y H:i') }}
+                            </small>
                         </div>
                     </div>
-                {% endfor %}
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <div class="text-center py-5">
+            <div class="mb-4">
+                <i class="fas fa-images text-muted" style="font-size: 4rem;"></i>
             </div>
-        {% else %}
-            <div class="text-center text-muted py-5">
-                <p>Aucune photo pour le moment.</p>
+            <h3 class="text-muted mb-3">Aucune photo pour le moment</h3>
+            <p class="text-muted">Les premières photos apparaîtront bientôt ici.</p>
+        </div>
+    {% endif %}
+
+    {# Section upload admin #}
+    {% if is_granted('ROLE_ADMIN') %}
+        <div class="card border-0 shadow-sm">
+            <div class="card-header bg-primary text-white">
+                <h4 class="mb-0">
+                    <i class="fas fa-plus-circle me-2"></i>Ajouter des photos
+                </h4>
             </div>
-        {% endif %}
+            <div class="card-body p-4">
+                <form method="post" enctype="multipart/form-data">
+                    <div class="mb-4">
+                        <label for="photos" class="form-label fw-semibold">
+                            <i class="fas fa-upload me-2 text-primary"></i>
+                            Sélectionner des images
+                        </label>
+                        <input type="file" 
+                               id="photos" 
+                               name="photos[]" 
+                               class="form-control form-control-lg"
+                               accept=".jpg,.jpeg,.png,.webp" 
+                               multiple 
+                               required>
+                        <div class="form-text">
+                            <i class="fas fa-info-circle me-1"></i>
+                            Formats acceptés : JPG, PNG, WEBP - Taille max : 10MB par fichier
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-lg px-4">
+                        <i class="fas fa-cloud-upload-alt me-2"></i>Uploader les photos
+                    </button>
+                </form>
+            </div>
+        </div>
+    {% else %}
+        <div class="card border-0 bg-light">
+            <div class="card-body text-center p-4">
+                <i class="fas fa-lock text-muted mb-3" style="font-size: 2rem;"></i>
+                <p class="text-muted mb-0">Seuls les administrateurs peuvent ajouter ou supprimer des photos.</p>
+            </div>
+        </div>
+    {% endif %}
 
-        <hr class="my-5">
+</div>
 
-        {# Formulaire d’upload - visible seulement admin #}
-        {% if is_granted('ROLE_ADMIN') %}
-            <h2 class="h4 mb-3">Ajouter des photos</h2>
-            <form method="post" enctype="multipart/form-data">
-                <div class="mb-3">
-                    <label for="photos" class="form-label">Sélectionner des images (JPG, PNG, WEBP, max 10MB)</label>
-                    <input type="file" id="photos" name="photos[]" class="form-control"
-                           accept=".jpg,.jpeg,.png,.webp" multiple required>
-                </div>
-                <button class="btn btn-primary">Uploader</button>
-            </form>
-        {% else %}
-            <p class="text-muted">Seuls les administrateurs peuvent ajouter ou supprimer des photos.</p>
-        {% endif %}
-    </div>
-
-    {# Modal image plein écran #}
-    <div class="modal fade" id="photoModal" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-xl">
-            <div class="modal-content bg-dark">
-                <div class="modal-body p-0 text-center">
-                    <img id="modalPhoto" src="" alt="Photo" class="modal-img">
-                </div>
-                <div class="modal-footer justify-content-between bg-dark border-0">
-                    <a id="downloadLink" href="#" download class="btn btn-outline-light">Télécharger</a>
-                    <button type="button" class="btn btn-light" data-bs-dismiss="modal">Fermer</button>
-                </div>
+{# Modal image plein écran #}
+<div class="modal fade" id="photoModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-xl">
+        <div class="modal-content bg-dark border-0">
+            <div class="modal-header border-0">
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body p-0 text-center">
+                <img id="modalPhoto" src="" alt="Photo" class="img-fluid">
+            </div>
+            <div class="modal-footer justify-content-between bg-dark border-0">
+                <a id="downloadLink" href="#" download class="btn btn-outline-light">
+                    <i class="fas fa-download me-2"></i>Télécharger
+                </a>
+                <button type="button" class="btn btn-light" data-bs-dismiss="modal">
+                    <i class="fas fa-times me-2"></i>Fermer
+                </button>
             </div>
         </div>
     </div>
+</div>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const modalEl = document.getElementById('photoModal');
-            const modalImg = document.getElementById('modalPhoto');
-            const downloadLink = document.getElementById('downloadLink');
-            const bsModal = new bootstrap.Modal(modalEl);
+<style>
+/* Effet hover sur les cartes */
+.hover-lift {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
 
-            document.querySelectorAll('.open-photo').forEach(a => {
-                a.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    const src = a.getAttribute('data-src');
-                    modalImg.src = src;
-                    downloadLink.href = src;
-                    bsModal.show();
-                });
-            });
+.hover-lift:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 1rem 2rem rgba(0,0,0,.15) !important;
+}
 
-            modalEl.addEventListener('hidden.bs.modal', () => { modalImg.src = ''; });
+/* Icône d'agrandissement */
+.hover-show {
+    transition: opacity 0.3s ease;
+}
+
+.hover-lift:hover .hover-show {
+    opacity: 1 !important;
+}
+
+/* Overlay sombre sur l'image */
+.hover-lift:hover .card-img-top {
+    filter: brightness(0.7);
+    transition: filter 0.3s ease;
+}
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const modalEl = document.getElementById('photoModal');
+    const modalImg = document.getElementById('modalPhoto');
+    const downloadLink = document.getElementById('downloadLink');
+    const bsModal = new bootstrap.Modal(modalEl);
+
+    document.querySelectorAll('.open-photo').forEach(a => {
+        a.addEventListener('click', (e) => {
+            e.preventDefault();
+            const src = a.getAttribute('data-src');
+            modalImg.src = src;
+            downloadLink.href = src;
+            bsModal.show();
         });
-    </script>
+    });
+
+    modalEl.addEventListener('hidden.bs.modal', () => { 
+        modalImg.src = ''; 
+    });
+});
+</script>
+
 {% endblock %}
